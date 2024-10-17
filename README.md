@@ -7,4 +7,7 @@ Languages I want to include: german, spanish, english, japanese.
 I want to code in python, using tkinter (Never used before, but seems as a simple GUI )
 It is only supposed to work locally on my computer.
 
-##
+## Additional 
+
+Maybe:
+pip install customtkinter
