@@ -1,6 +1,6 @@
 import csv
 class UseData:
-    fieldname = ['num','word','meaning','mnemonic']
+    fieldnames = ['num','word','meaning','mnemonic']
 
     # returns dictionary
     @staticmethod
@@ -15,8 +15,11 @@ class UseData:
     # update the mnemonic
     @staticmethod
     def update_in_german(txtfile, row, new_mnemonic):
+        print(row)
         data = UseData.read_in_german(txtfile)
         data[row]['mnemonic'] = new_mnemonic
         with open(txtfile, mode='w', encoding='utf-8', newline='') as file:
             csv_writer = csv.DictWriter(file, fieldnames=UseData.fieldnames)
+            # Write the headers first
+            csv_writer.writeheader()
             csv_writer.writerows(data)  # Write the updated rows

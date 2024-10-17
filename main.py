@@ -20,11 +20,13 @@ class FlashcardApp:
         
         #####3 ONLY FOR TESTING
         self.chooseLanguage( 0)
+        print ("Dict size")
         # change this later in the choose language func
-        self.lenDict = len(self.german)
+        self.len_dict = len(self.dict)
 
         # inital page to 0 where u choose the language
         # page useful for knowing which row im on in my list of dict
+        # starts from -1 because page will be first  and i call nextword() even for the first word
         self.page = -1
         # What is this doing
         self.word_label =tk.Label(
@@ -52,18 +54,22 @@ class FlashcardApp:
 
         # Display the first word
         self.next_word()
+        print("am i here")
 
     # implement the function that would choose the language
     def chooseLanguage(self, num):
         if num == 0:
             self.dict = UseData.read_in_german('german.csv')
+        
+        self.txtfile = "german.csv"
         return 0
     
     ##
-    # this function take the next chronologica word
+    # this function take the next chronological word
+    # i call this also for the first word thats why self.page strats at -1
     def next_word(self):
         # block or pop up (need to add) if no more rows
-        if (self.page +1 < self.lenDict):
+        if (self.page +1 < self.len_dict):
             # increment the page as we are taking new word
             self.page +=1
             self.current_word = self.dict[self.page]['word']
@@ -81,8 +87,12 @@ class FlashcardApp:
     # button to submit the input for mnemonic
     def submit(self):
         # Get the input from the Entry widget
-        entered_text = self.input_field.get()
-        print(entered_text)
+        input_text = self.input_field.get()
+        print(input_text)
+
+        # row is page +1  since csv has a header,
+        #  txtfile initalized in chooselanguage
+        UseData.update_in_german(self.txtfile, self.page+1, input_text)
 
     ### Function called when button show meaning is pressed, make the meaning appear
     def show_meaning(self):
@@ -93,7 +103,7 @@ class FlashcardApp:
         self.show_mnemonic_button.config(text="Hide Meaning", command=self.hide_meaning)
 
         ## If no mnemonic then create and save
-        if (False):
+        if (self.dict[self.page]['mnemonic']==""):
             self.input_field = tk.Entry(root, width=30)
             self.input_field.pack(pady=10)
             submit_button = tk.Button(root, text="Submit", command=self.submit)

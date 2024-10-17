@@ -16,7 +16,16 @@ It is only supposed to work locally on my computer.
   1. Random words each time you go next
   2. You can input the page where they are all sorted originally so just go through all by inputing a number
   3. Only show those that don't have mnemonics?
+   
+## Current bugs
+* If u press submit button several times it will spawn infinte
+    ` Should disappear and update the page to see the new mnemonic`
+* all the submit button stays even after u change pages??
+* The update dict function is super inefficient but for now I dont see alternatives ` What if i only updated the dictionary that has already read in the csv and then when i would press a quit button it would save it to csv?`
+* when i press show + hide it produces a new submit button ????
 ## Additional 
+
+
 
 Maybe:
 pip install customtkinter
