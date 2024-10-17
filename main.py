@@ -17,21 +17,27 @@ class FlashcardApp:
         self.root = root
         self.root.title("Vocabulary Flashcards")
         self.german = UseData.read_in_german('german.csv')
-        print(self.german)
+        
+        #####3 ONLY FOR TESTING
+        self.chooseLanguage( 0)
+        # change this later in the choose language func
+        self.lenDict = len(self.german)
+
         # inital page to 0 where u choose the language
-        self.page = 0
-        # Set up labels
+        # page useful for knowing which row im on in my list of dict
+        self.page = -1
+        # What is this doing
         self.word_label =tk.Label(
-    root,
-    text="Hello, Tkinter!", 
-    font=("Helvetica", 24, "bold"),  # Font family, size, and weight
-    fg="#ffffff",  # Text color
-    bg="#3498db",  # Background color
-    padx=20,  # Padding around text horizontally
-    pady=20,  # Padding around text vertically
-    relief="flat",  # Adds a 3D effect (flat, raised, sunken, ridge, etc.)
-    borderwidth=5,  # Border thickness
-)
+            root,
+            text="Hello, Tkinter!", 
+            font=("Helvetica", 24, "bold"),  # Font family, size, and weight
+            fg="#ffffff",  # Text color
+            bg="#3498db",  # Background color
+            padx=20,  # Padding around text horizontally
+            pady=20,  # Padding around text vertically
+            relief="flat",  # Adds a 3D effect (flat, raised, sunken, ridge, etc.)
+            borderwidth=5,  # Border thickness
+        )
         self.word_label.pack(pady=20)
         
         self.mnemonic_label = tk.Label(root, text="", font=("Helvetica", 16))
@@ -47,12 +53,32 @@ class FlashcardApp:
         # Display the first word
         self.next_word()
 
+    # implement the function that would choose the language
+    def chooseLanguage(self, num):
+        if num == 0:
+            self.dict = UseData.read_in_german('german.csv')
+        return 0
+    
+    ##
+    # this function take the next chronologica word
     def next_word(self):
-        self.current_word = choice(words)
-        self.word_label.config(text=self.current_word["word"])
-        # remove the mnemonic
-        self.mnemonic_label.config(text="")
-        self.show_mnemonic_button.config(text="Show Meaning")
+        # block or pop up (need to add) if no more rows
+        if (self.page +1 < self.lenDict):
+            # increment the page as we are taking new word
+            self.page +=1
+            self.current_word = self.dict[self.page]['word']
+            #self.current_word = choice(words)
+            
+            # update the word
+            self.word_label.config(text=self.current_word)
+
+            # remove the mnemonic 
+            self.mnemonic_label.config(text="")
+            
+            # reset the button text from hide -> show
+            self.show_mnemonic_button.config(text="Show Meaning")
+
+    # button to submit the input for mnemonic
     def submit(self):
         # Get the input from the Entry widget
         entered_text = self.input_field.get()
