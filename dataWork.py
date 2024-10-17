@@ -1,6 +1,6 @@
 import csv
 class UseData:
-    fieldnames = ['num','word','meaning','mnemonic']
+    fieldnames = ['word','meaning','mnemonic']
 
     # returns dictionary
     @staticmethod
