@@ -10,13 +10,14 @@ words = [
     # word # meaning # mnemonic
 ]
 
+german_txt = "german_verb.csv"
 
 class FlashcardApp:
     
     def __init__(self, root):
         self.root = root
         self.root.title("Vocabulary Flashcards")
-        self.german = UseData.read_in_german('german.csv')
+        self.german = UseData.read_in_german(german_txt)
         
         #####3 ONLY FOR TESTING
         self.chooseLanguage( 0)
@@ -59,9 +60,9 @@ class FlashcardApp:
     # implement the function that would choose the language
     def chooseLanguage(self, num):
         if num == 0:
-            self.dict = UseData.read_in_german('german.csv')
+            self.dict = UseData.read_in_german(german_txt)
         
-        self.txtfile = "german.csv"
+        self.txtfile = german_txt
         return 0
     
     ##
@@ -83,7 +84,7 @@ class FlashcardApp:
             
             # reset the button text from hide -> show
             self.show_mnemonic_button.config(text="Show Meaning")
-
+    
     # button to submit the input for mnemonic
     def submit(self):
         # Get the input from the Entry widget
@@ -103,11 +104,11 @@ class FlashcardApp:
         self.show_mnemonic_button.config(text="Hide Meaning", command=self.hide_meaning)
 
         ## If no mnemonic then create and save
-        if (self.dict[self.page]['mnemonic']==""):
-            self.input_field = tk.Entry(root, width=30)
-            self.input_field.pack(pady=10)
-            submit_button = tk.Button(root, text="Submit", command=self.submit)
-            submit_button.pack(pady=10)
+        # if (self.dict[self.page]['mnemonic']==""):
+        #     self.input_field = tk.Entry(root, width=30)
+        #     self.input_field.pack(pady=10)
+        #     submit_button = tk.Button(root, text="Submit", command=self.submit)
+        #     submit_button.pack(pady=10)
 
     def hide_meaning(self):
         self.mnemonic_label.config(text="")
