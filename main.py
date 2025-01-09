@@ -1,6 +1,7 @@
 import tkinter as tk
 from random import choice
 from dataWork import UseData
+import random
 # Sample words and mnemonics
 words = [
     {"word": "Bonjour", "meaning": "Hello (French)", "mnemonic": "Bon = Good, Jour = Day"},
@@ -53,8 +54,13 @@ class FlashcardApp:
         self.next_word_button = tk.Button(root, text="Next Word", command=self.next_word)
         self.next_word_button.pack(pady=10)
 
-        # Display the first word
-        self.next_word()
+        self.random_word_button = tk.Button(root, text="Random Word", command=self.random_word)
+        self.random_word_button.pack(pady=10)
+
+        # Display the first word in order
+        # self.next_word()
+        # Display random word
+        self.random_word()
         print("am i here")
 
     # implement the function that would choose the language
@@ -84,6 +90,18 @@ class FlashcardApp:
             
             # reset the button text from hide -> show
             self.show_mnemonic_button.config(text="Show Meaning")
+
+    def random_word(self):
+        random_w = random.randint(0, self.len_dict-1)
+        self.page = random_w
+        self.current_word = self.dict[self.page]['word']
+        self.word_label.config(text=self.current_word)
+
+            # remove the mnemonic 
+        self.mnemonic_label.config(text="")
+            
+            # reset the button text from hide -> show
+        self.show_mnemonic_button.config(text="Show Meaning")
     
     # button to submit the input for mnemonic
     def submit(self):
