@@ -4,7 +4,7 @@ The goal of this program is to create my own mnemonics for different languages, 
 Languages I want to include: german, spanish, english, japanese.
 
 ## Method 
-I tried to search for a dataset that would regroup liek 2000+ most used vocabulary, however I did not find a viable csv file.
+I tried to search for a dataset that would regroup like 2000+ most used vocabulary, however I did not find a viable csv file.
 Therefore for example for the german dataset, I will be manually inputting all my data in my format using a website that regroups the most frequent vocab.
 Website:https://vocabeo.com/browse/art
 ## Technical
